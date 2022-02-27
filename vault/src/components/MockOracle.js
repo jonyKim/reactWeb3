@@ -6,8 +6,7 @@ import { ethers } from "ethers";
 import contractInfo from "../constant/MockOracle.json";
 
 function MockOracle(props) {
-  const [name, setName] = useState();
-  const [balance, setBalance] = useState();
+  const [price, setPrice] = useState();
   const [contract, setContract] = useState();
 
   const { library } = useWeb3React();
@@ -23,17 +22,28 @@ function MockOracle(props) {
         library
       );
 
+      console.log(tmp);
       setContract(tmp);
-      if (contract) {
+      if (tmp) {
+        let value = await tmp.getLatestPrice();
+        console.log("latestPrice: " + value);
+
+        setPrice(value.toString());
       }
     };
 
-    if (typeof props.account !== "undefined" && !contract) {
+    if (!contract) {
       load();
     }
   });
 
-  return <div>MockOracle Section..</div>;
+  return (
+    <div>
+      <div>MockOracle Section..</div>
+      <div>Current Price : {price}</div>
+      set price :<button>Submit</button>
+    </div>
+  );
 }
 
 export default MockOracle;

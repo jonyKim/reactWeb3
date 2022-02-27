@@ -11,6 +11,7 @@ import Vault from "./components/Vault";
 import StableCoin from "./components/StableCoin";
 
 import { act } from "react-dom/test-utils";
+import MockOracle from "./components/MockOracle";
 
 function App() {
   const { chainId, account, active, activate, deactivate, library } =
@@ -84,6 +85,7 @@ function App() {
         {active ? (
           <div>
             <StableCoin account={account}></StableCoin>
+            <MockOracle></MockOracle>
             <Vault account={account}></Vault>
           </div>
         ) : (
