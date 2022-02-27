@@ -1,4 +1,7 @@
 {
+  "addr": {
+    "rinkeby": "0xbEc1a536785655419462F41D837D4A4561f78696"
+  },
   "abi": [
     {
       "inputs": [
