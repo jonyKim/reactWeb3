@@ -6,9 +6,20 @@ import { formatEther } from "@ethersproject/units";
 
 import { injected } from "./lib/connectors";
 
+import { ethers } from 'ethers';
+
+import "./styles/globals.css";
+
+import contractAddrs from './constant/contract-addr.json';
+import StableCoin from './constant/Coin.json';
+
 function App() {
-  const { chainId, account, active, activate, deactivate } = useWeb3React();
+  const { chainId, account, active, activate, deactivate, library } = useWeb3React();
   const balance = useBalance();
+
+  // read-only
+  const TokenContract = new ethers.Contract(contractAddrs.rinkeby.StableCoin, StableCoin.abi, library);
+  console.log(TokenContract);
 
   const handleConnect = () => {
     if (active) {
@@ -25,16 +36,57 @@ function App() {
 
   return (
     <div>
-      <div>
-        <p>Account: {account}</p>
-        <p>ChainId: {chainId}</p>
-        <p>Balance: {balance}</p>
+    <nav className="bg-gray-800">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="relative flex items-center justify-between h-16 text-gray-100">
+          {active ? (
+            <>
+              <div>
+                Chain Id : {chainId}
+              </div>
+              <div>
+                Addr : {account.substr(0, 8)}...{account.substr(-8, 8)}
+              </div>
+              <div>{balance}</div>
+              <button
+                className="h-10 px-5 border border-gray-400 rounded-md"
+                onClick={async () => {
+                  const message = `Logging in at ${new Date().toISOString()}`;
+                  const signature = await library
+                    .getSigner(account)
+                    .signMessage(message)
+                    .catch((error) => console.error(error));
+                  console.log({ message, account, signature });
+                }}
+              >
+                Sign In
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="h-10 px-5 border border-gray-400 rounded-md"
+                onClick={() => {
+                  activate(new InjectedConnector({}));
+                }}
+              >
+                Connect
+              </button>
+            </>
+          )}
+        </div>
       </div>
-      <div>
-        <button type="button" onClick={handleConnect}>
-          {active ? "disconnect" : "connect"}
-        </button>
-      </div>
+    </nav>
+    <div>
+      {
+        active ? (
+          <div>
+            AAA
+          </div>
+        ) : (
+        <></>
+      )}
+    </div>
     </div>
   );
 }

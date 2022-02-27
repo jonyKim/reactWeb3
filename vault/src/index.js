@@ -2,11 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
-import { useState, useEffect } from "react";
-import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
+import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { formatEther } from "@ethersproject/units";
+
+import "./styles/globals.css";
 
 ReactDOM.render(
   <React.StrictMode>

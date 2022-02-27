@@ -1,0 +1,8 @@
+{
+    "rinkeby": {
+        "StableCoin": "0x74c6A449e5C96EdABb5592f5a7e06dBD8DB4fC06",
+        "MockOracle": "0x56bE8f125154b3756c82e78b2dA869d9c89cDad5",
+        "PriceConsumer": "0x2d19F28A3ce4daBA4739F86E44B463C0027CE2b0",
+        "Vault": "0xbEc1a536785655419462F41D837D4A4561f78696"
+    }
+}
